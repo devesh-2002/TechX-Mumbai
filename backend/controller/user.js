@@ -47,4 +47,14 @@ const addUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getUsers, addUser };
+const getUserfromemail = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ email: req.params.email });
+  if (user) {
+    res.status(200).json(user._id);
+  } else {
+    res.status(404);
+    console.log("User not found");
+  }
+});
+
+module.exports = { getUsers, addUser, getUserfromemail };
