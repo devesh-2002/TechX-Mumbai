@@ -1,11 +1,8 @@
 const Event = require("../models/event");
 const asyncHandler = require("express-async-handler");
-
+let nodemailer = require("nodemailer");
 const getEvents = async (req, res) => {
-  res
-    .status(200)
-    .json(await Event.find().populate("organizer"))
-    ;
+  res.status(200).json(await Event.find().populate("organizer"));
 };
 
 const getEventById = async (req, res) => {
@@ -19,6 +16,33 @@ const getEventById = async (req, res) => {
 };
 
 const updateEventApproval = asyncHandler(async (req, res) => {
+  const email = req.body.email;
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "2020.sarvesh.limaye@ves.ac.in",
+      pass: process.env.password,
+    },
+  });
+
+  let mailOptions = {
+    from: "2020.sarvesh.limaye@ves.ac.in",
+    to: email,
+    subject: "[TechX Mumbai] Event Registration Approved",
+    html: `
+    <p>Your registration for event is approved</p>
+    </p>
+    `,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent");
+    }
+  });
+
   const event = await Event.findByIdAndUpdate(req.params.id, {
     isApproved: true,
     function(err, docs) {
