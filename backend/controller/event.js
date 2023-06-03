@@ -2,7 +2,15 @@ const Event = require("../models/event");
 const asyncHandler = require("express-async-handler");
 let nodemailer = require("nodemailer");
 const getEvents = async (req, res) => {
-  res.status(200).json(await Event.find().populate("organizer"));
+  res
+    .status(200)
+    .json(
+      await Event.find()
+        .populate("organizer")
+        .populate("attendees")
+        .populate("speakers")
+        .populate("volunteers")
+    );
 };
 
 const getEventById = async (req, res) => {
@@ -14,6 +22,24 @@ const getEventById = async (req, res) => {
     console.log("Event not found");
   }
 };
+
+const updateAttendees = asyncHandler(async (req, res) => {
+  const event = await Event.findById(req.params.id);
+  const id = req.params.id;
+  const updateEvent = await Event.findByIdAndUpdate(
+    id,
+    {
+      $push: { attendees: req.body.attendees },
+    },
+    { new: true }
+  );
+  if (updateEvent) {
+    res.status(200).json(updateEvent);
+  } else {
+    res.status(404);
+    console.log("Event not found");
+  }
+});
 
 const updateEventApproval = asyncHandler(async (req, res) => {
   const email = req.body.email;
@@ -128,4 +154,10 @@ const createEvent = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getEvents, getEventById, createEvent, updateEventApproval };
+module.exports = {
+  getEvents,
+  getEventById,
+  createEvent,
+  updateAttendees,
+  updateEventApproval,
+};
