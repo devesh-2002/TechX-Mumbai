@@ -2,7 +2,10 @@ const Event = require("../models/event");
 const asyncHandler = require("express-async-handler");
 
 const getEvents = async (req, res) => {
-  res.status(200).json(await Event.find());
+  res
+    .status(200)
+    .json(await Event.find().populate("organizer"))
+    ;
 };
 
 const getEventById = async (req, res) => {
