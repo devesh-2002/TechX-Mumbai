@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const colors = {
   brand: {
@@ -27,8 +28,16 @@ const theme = extendTheme({ colors, config });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <Auth0Provider
+      domain="dev-uubmit4tpy5bi5v1.us.auth0.com"
+      clientId="OZAJnukEduuJJHE4gJUOPstTitD0zx7q"
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+    >
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </Auth0Provider>
   </React.StrictMode>
 );
