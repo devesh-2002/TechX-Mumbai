@@ -9,7 +9,7 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function AdminCard({
   id,
@@ -36,17 +36,21 @@ export default function AdminCard({
   // const handleClick = () => {
   //   Navigate(`/events/${id}`);
   // }
-
+  const email = organizer.email;
+  console.log(email);
   const approveEvent = async () => {
-    const response = await fetch(`http://localhost:5000/api/events/approval/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        isApproved: true,
-      }),
-    });
+    const response = await fetch(
+      `http://localhost:5000/api/events/approval/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }
+    );
     const data = await response.json();
     console.log(data);
   };
@@ -118,7 +122,7 @@ export default function AdminCard({
                 boxShadow: "lg",
                 variant: "solid",
               }}
-              onClick={()=>{
+              onClick={() => {
                 approveEvent();
                 Navigate(`/explore/`);
               }}
