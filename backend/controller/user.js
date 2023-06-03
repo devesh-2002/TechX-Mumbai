@@ -2,7 +2,15 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 
 const getUsers = async (req, res) => {
-  res.status(200).json(await User.find());
+  res
+    .status(200)
+    .json(
+      await User.find()
+        .populate("attendedEvents")
+        .populate("organizedEvents")
+        .populate("speakeratEvents")
+        .populate("volunteeredEvents")
+    );
 };
 
 const addUser = asyncHandler(async (req, res) => {
@@ -47,6 +55,21 @@ const addUser = asyncHandler(async (req, res) => {
   }
 });
 
+const updateUser = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const updateUser = await User.findByIdAndUpdate(
+    id,
+    { $push: { attendedEvents: req.body.attendedEvents } },
+    { new: true }
+  );
+  if (updateUser) {
+    res.status(200).json(updateUser);
+  } else {
+    res.status(404);
+    console.log("User not found");
+  }
+});
+
 const getUserfromemail = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email: req.params.email });
   if (user) {
@@ -57,4 +80,4 @@ const getUserfromemail = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getUsers, addUser, getUserfromemail };
+module.exports = { getUsers, addUser, getUserfromemail, updateUser };
