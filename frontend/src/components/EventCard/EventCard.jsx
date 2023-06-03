@@ -7,7 +7,9 @@ import {
   Avatar,
   useColorModeValue,
   Image,
+  Button,
 } from "@chakra-ui/react";
+import { useNavigate  } from 'react-router-dom';
 
 export default function EventCard({
   id,
@@ -29,6 +31,7 @@ export default function EventCard({
   organizer,
   domain,
 }) {
+  const Navigate = useNavigate();
   return (
     <div>
       {isApproved && (
@@ -88,6 +91,21 @@ export default function EventCard({
                 </Text>
               </Stack>
             </Stack>
+            <Button
+            w={"full"}
+            mt={8}
+            colorScheme="teal"
+            variant="outline"
+            rounded={"md"}
+            _hover={{
+              transform: "translateY(-2px)",
+              boxShadow: "lg",
+              variant: "solid",
+            }}
+            onClick={() => Navigate(`/explore/${id}`)}
+          >
+            View Details
+          </Button>
           </Box>
         </Center>
       )}
