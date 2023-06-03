@@ -8,6 +8,7 @@ import {
   Input,
   Stack,
   useColorModeValue,
+  Grid
 } from '@chakra-ui/react';
 
 import AdminCard from "../../components/AdminCard/AdminCard";
@@ -78,7 +79,7 @@ const Admin = () => {
           </Stack>
         </Flex>
       ): (
-        <Flex templateColumns="repeat(4, 1fr)" gap={4} minW={100} m={8}>
+        <Grid templateColumns="repeat(4, 1fr)" gap={4} minW={100} m={8}>
         {events.map((event) => (
           <AdminCard
             key={event._id}
@@ -102,7 +103,7 @@ const Admin = () => {
             domain={event.domain}
           />
         ))}
-      </Flex>
+      </Grid>
       )}
       
       
