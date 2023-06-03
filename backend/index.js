@@ -1,6 +1,7 @@
 require("dotenv").config();
 let cors = require("cors");
 const express = require("express");
+const userRoutes = require("./routes/user");
 const app = express();
 
 //middleware
@@ -17,6 +18,8 @@ const port = process.env.PORT || 5000;
 app.get("/", (req, res) => {
   res.send("Initialized successfully !");
 });
+
+app.use("/api/users", userRoutes);
 
 const start = async () => {
   try {
