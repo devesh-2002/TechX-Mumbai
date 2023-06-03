@@ -5,6 +5,7 @@ import Admin from "./pages/Admin/Admin";
 import Events from "./pages/Events/Events";
 import AddEvent from "./pages/AddEvent/AddEvent";
 import ApplyVolunteer from "./pages/ApplyVolunteer/ApplyVolunteer";
+import Custom404 from "./pages/Custom404/Custom404";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/explore" element={<Events />} />
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
+          <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
     </>
