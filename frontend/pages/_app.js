@@ -1,3 +1,5 @@
+import '../styles/globals.css'
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import "../styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
@@ -23,9 +25,11 @@ function MyApp({ Component, pageProps }) {
 
   const theme = extendTheme({ colors, config });
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <UserProvider>
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </UserProvider>
   );
 }
 
