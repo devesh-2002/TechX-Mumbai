@@ -24,8 +24,8 @@ const updateEventApproval = asyncHandler(async (req, res) => {
       pass: process.env.password,
     },
     tls: {
-      rejectUnauthorized: false
-  }
+      rejectUnauthorized: false,
+    },
   });
 
   let mailOptions = {
