@@ -17,9 +17,15 @@ import {
   InputRightElement,
   InputLeftElement,
   useToast,
+  VisuallyHidden,
+  Stack,
+  Icon,
+  chakra,
+  Text,
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { useAuth0 } from "@auth0/auth0-react";
+import FileBase64 from "react-file-base64";
 
 const obj = {
   title: "",
@@ -50,7 +56,7 @@ const Form1 = () => {
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Add Event Details
       </Heading>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel htmlFor="title" fontWeight={"normal"}>
           Event Title
         </FormLabel>
@@ -58,9 +64,10 @@ const Form1 = () => {
           id="title"
           placeholder="Title..."
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
       </FormControl>
-      <FormControl mr="5%" mt="2%">
+      <FormControl mr="5%" mt="2%" isRequired>
         <FormLabel htmlFor="description" fontWeight={"normal"}>
           Description
         </FormLabel>
@@ -114,10 +121,12 @@ const Form2 = () => {
   const [domain, setDomain] = useState("");
   const [datetime, setDatetime] = useState("");
   const [location, setLocation] = useState("");
+  const [eventBanner, setEventBanner] = useState("");
 
   obj.domain = domain;
   obj.datetime = datetime;
   obj.location = location;
+  obj.eventBanner = eventBanner;
 
   return (
     <>
@@ -181,16 +190,112 @@ const Form2 = () => {
           onChange={(e) => setLocation(e.target.value)}
         />
       </FormControl>
+      <FormControl mt="2%">
+        <FormLabel
+          fontSize="sm"
+          fontWeight={"normal"}
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+        >
+          Event Banner
+        </FormLabel>
+
+        <Flex
+          mt={1}
+          justify="center"
+          px={6}
+          pt={5}
+          pb={6}
+          borderWidth={2}
+          _dark={{
+            color: "gray.500",
+          }}
+          borderStyle="dashed"
+          rounded="md"
+        >
+          <Stack spacing={1} textAlign="center">
+            <FileBase64
+              id="banners"
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) => setEventBanner(base64)}
+            >
+              <Icon
+                mx="auto"
+                boxSize={12}
+                color="gray.400"
+                _dark={{
+                  color: "gray.500",
+                }}
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </Icon>
+              <Flex
+                fontSize="sm"
+                color="gray.600"
+                _dark={{
+                  color: "gray.400",
+                }}
+                alignItems="baseline"
+              >
+                <chakra.label
+                  htmlFor="file-upload"
+                  cursor="pointer"
+                  rounded="md"
+                  fontSize="md"
+                  color="brand.600"
+                  _dark={{
+                    color: "brand.200",
+                  }}
+                  pos="relative"
+                  _hover={{
+                    color: "brand.400",
+                    _dark: {
+                      color: "brand.300",
+                    },
+                  }}
+                >
+                  <span>Upload a file</span>
+                  <VisuallyHidden>
+                    <input id="file-upload" name="file-upload" type="file" />
+                  </VisuallyHidden>
+                </chakra.label>
+                <Text pl={1}>or drag and drop</Text>
+              </Flex>
+              <Text
+                fontSize="xs"
+                color="gray.500"
+                _dark={{
+                  color: "gray.50",
+                }}
+              >
+                PNG, JPG, GIF up to 10MB
+              </Text>
+            </FileBase64>
+          </Stack>
+        </Flex>
+      </FormControl>
     </>
   );
 };
 
 const Form3 = () => {
   const [tickets, setTickets] = useState(0);
-  const [prize, setPrize] = useState(0);
+  const [price, setPrice] = useState(0);
 
   obj.tickets = parseInt(tickets);
-  obj.prize = parseInt(prize);
+  obj.price = parseInt(price);
 
   console.log(obj);
 
@@ -199,7 +304,7 @@ const Form3 = () => {
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Add Event Details
       </Heading>
-      <FormControl mt="2%">
+      <FormControl mt="2%" isRequired>
         <FormLabel htmlFor="tickets" fontWeight={"normal"}>
           Total no. of Tickets to issue
         </FormLabel>
@@ -224,7 +329,7 @@ const Form3 = () => {
           />
           <Input
             placeholder="Enter amount"
-            onChange={(e) => setPrize(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
           />
           <InputRightElement>
             <CheckIcon color="green.500" />
@@ -326,6 +431,7 @@ export default function multistep() {
                         price: obj.price,
                         tickets: obj.tickets,
                         domain: obj.domain,
+                        image: obj.eventBanner,
                       }),
                     }
                   );
