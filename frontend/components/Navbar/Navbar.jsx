@@ -27,6 +27,30 @@ export default function Navbar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();
 
+  const collectData = async () => {
+    let name = user.name;
+    let email = user.email;
+    let image = user.picture;
+    let result = await fetch("http://localhost:5000/api/users/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        image,
+      }),
+    });
+
+    result = await result.json();
+    console.log(result);
+  };
+
+  if (isAuthenticated) {
+    collectData();
+  }
+
   return (
     <>
       <Box bg={useColorModeValue("white", "gray.800")} px={10}>
@@ -54,7 +78,7 @@ export default function Navbar() {
             <Link to="/">TechX Mumbai</Link>
           </HStack>
           <Flex alignItems={"center"}>
-            {user && (
+            {isAuthenticated && (
               <div style={{ display: "flex" }}>
                 <HStack
                   as={"nav"}
@@ -82,19 +106,7 @@ export default function Navbar() {
                 </HStack>
               </div>
             )}
-            {user == null ? (
-              <Button
-                display="flex"
-                flexDir="row"
-                variant={"solid"}
-                colorScheme={"teal"}
-                size={"sm"}
-                mr={4}
-                leftIcon={<Icon as={CgProfile} boxSize={6} />}
-              >
-                <LoginButton />
-              </Button>
-            ) : (
+            {isAuthenticated && (
               <Menu>
                 <MenuButton
                   as={Button}
@@ -121,6 +133,21 @@ export default function Navbar() {
                 </MenuList>
               </Menu>
             )}
+            {!isAuthenticated && !isLoading &&
+              (
+                <Button
+                  display="flex"
+                  flexDir="row"
+                  variant={"solid"}
+                  colorScheme={"teal"}
+                  size={"sm"}
+                  mr={4}
+                  leftIcon={<Icon as={CgProfile} boxSize={6} />}
+                >
+                  <LoginButton />
+                </Button>
+              )}
+            {isLoading && <div>Loading...</div>}
           </Flex>
         </Flex>
 
