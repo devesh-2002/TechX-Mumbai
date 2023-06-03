@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Grid,Flex } from "@chakra-ui/react";
 
 import EventCard from "../../components/EventCard/EventCard";
 
@@ -17,7 +17,7 @@ const Events = () => {
 
   return (
     <div>
-      <Flex templateColumns="repeat(4, 1fr)" gap={4} minW={100} m={8}>
+      <Grid templateColumns="repeat(3, 1fr)" gap={4} minW={100} m={8}>
         {events.map((event) => (
           <EventCard
             key={event._id}
@@ -41,7 +41,7 @@ const Events = () => {
             domain={event.domain}
           />
         ))}
-      </Flex>
+      </Grid>
     </div>
   );
 };

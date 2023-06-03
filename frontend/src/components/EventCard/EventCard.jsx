@@ -60,7 +60,7 @@ export default function EventCard({
                 fontSize={"sm"}
                 letterSpacing={1.1}
               >
-                Domain
+                {domain}
               </Text>
               <Heading
                 color={useColorModeValue("gray.700", "white")}
@@ -78,15 +78,15 @@ export default function EventCard({
             </Stack>
             <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
               <Avatar
-                src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
+                src={organizer.image}
                 alt={"Author"}
               />
               <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-                <Text fontWeight={600}>Achim Rolle</Text>
+                <Text fontWeight={600}>{organizer.name}</Text>
                 <Text color={"gray.500"}>Feb 08, 2021 </Text>
               </Stack>
               <Stack>
-                <Text ml={8} color={"green.400"} px={20} fontWeight={"bold"}>
+                <Text ml={8} color={"green.400"} px={10} fontWeight={"bold"}>
                   Online
                 </Text>
               </Stack>
