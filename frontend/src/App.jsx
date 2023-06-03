@@ -8,6 +8,7 @@ import ApplyVolunteer from "./pages/ApplyVolunteer/ApplyVolunteer";
 import Custom404 from "./pages/Custom404/Custom404";
 import Navbar from "./components/Navbar/Navbar";
 import EventDetails from "./pages/EventDetails/EventDetails";
+import CFPForm from "./components/CFPForm/CFPForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
           <Route path="/explore/:id" element={<EventDetails />} />
+          <Route path="/cfp" element={< CFPForm/>}></Route>
           <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
