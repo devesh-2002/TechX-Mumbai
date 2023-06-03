@@ -9,7 +9,7 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function EventCard({
   id,
@@ -48,7 +48,9 @@ export default function EventCard({
             <Box h={"210px"} bg={"gray.100"} mt={-6} mx={-6} mb={6}>
               <Image
                 src={
-                  "https://www.travelperk.com/wp-content/uploads/alexandre-pellaes-6vAjp0pscX0-unsplash-1-1-720x480.jpg"
+                  image
+                    ? image
+                    : "https://www.travelperk.com/wp-content/uploads/alexandre-pellaes-6vAjp0pscX0-unsplash-1-1-720x480.jpg"
                 }
                 layout={"fit"}
                 h={"210px"}
@@ -77,10 +79,7 @@ export default function EventCard({
               </Text>
             </Stack>
             <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-              <Avatar
-                src={organizer.image}
-                alt={"Author"}
-              />
+              <Avatar src={organizer.image} alt={"Author"} />
               <Stack direction={"column"} spacing={0} fontSize={"sm"}>
                 <Text fontWeight={600}>{organizer.name}</Text>
                 <Text color={"gray.500"}>Feb 08, 2021 </Text>
@@ -92,20 +91,20 @@ export default function EventCard({
               </Stack>
             </Stack>
             <Button
-            w={"full"}
-            mt={8}
-            colorScheme="teal"
-            variant="outline"
-            rounded={"md"}
-            _hover={{
-              transform: "translateY(-2px)",
-              boxShadow: "lg",
-              variant: "solid",
-            }}
-            onClick={() => Navigate(`/explore/${id}`)}
-          >
-            View Details
-          </Button>
+              w={"full"}
+              mt={8}
+              colorScheme="teal"
+              variant="outline"
+              rounded={"md"}
+              _hover={{
+                transform: "translateY(-2px)",
+                boxShadow: "lg",
+                variant: "solid",
+              }}
+              onClick={() => Navigate(`/explore/${id}`)}
+            >
+              View Details
+            </Button>
           </Box>
         </Center>
       )}
