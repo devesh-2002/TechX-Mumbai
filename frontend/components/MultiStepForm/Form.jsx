@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Progress,
   Box,
@@ -11,24 +11,15 @@ import {
   FormLabel,
   Input,
   Select,
-  SimpleGrid,
-  InputLeftAddon,
   InputGroup,
   Textarea,
   FormHelperText,
   InputRightElement,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Radio,
-  RadioGroup,
-  Stack,
   InputLeftElement,
   useToast,
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const obj = {
   title: "",
@@ -248,6 +239,10 @@ export default function multistep() {
   const toast = useToast();
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(33.33);
+  const [id, setId] = useState("");
+  const { user } = useAuth0();
+  const email = user.email;
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -307,7 +302,34 @@ export default function multistep() {
                 w="7rem"
                 colorScheme="red"
                 variant="solid"
-                onClick={() => {
+                onClick={async () => {
+                  const res = await fetch(
+                    `http://localhost:5000/api/users/${email}`
+                  );
+                  const data = await res.json();
+                  setId(data._id);
+                  console.log(id);
+                  let events = await fetch(
+                    `http://localhost:5000/api/events/add`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        title: obj.title,
+                        description: obj.description,
+                        mode: obj.mode,
+                        location: obj.location,
+                        date: obj.datetime,
+                        organizer: id,
+                        price: obj.price,
+                        tickets: obj.tickets,
+                        domain: obj.domain,
+                      }),
+                    }
+                  );
+                  console.log(events.json());
                   toast({
                     title: "Event Details Submitted.",
                     description: "We've created your account for you.",
