@@ -22,7 +22,7 @@ function App() {
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
           <Route path="/explore/:id" element={<EventDetails />} />
-          <Route path="/cfp" element={< CFPForm/>}></Route>
+          <Route path="/cfp/:id" element={< CFPForm/>}></Route>
           <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
