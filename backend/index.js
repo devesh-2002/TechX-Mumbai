@@ -3,6 +3,7 @@ let cors = require("cors");
 const express = require("express");
 const userRoutes = require("./routes/user");
 const eventRoutes = require("./routes/event");
+const cfpsRoutes = require("./routes/cfp");
 const app = express();
 
 //middleware
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/cfps", cfpsRoutes);
 
 const start = async () => {
   try {
