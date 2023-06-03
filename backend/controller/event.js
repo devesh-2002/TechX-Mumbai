@@ -33,8 +33,13 @@ const updateEventApproval = asyncHandler(async (req, res) => {
     to: email,
     subject: "[TechX Mumbai] Event Registration Approved",
     html: `
-    <p>Your registration for event is approved</p>
-    </p>
+    <p><b>Congratulations🎉🎉!</b></p>
+    <p>We are thrilled to inform you that, the event you registered has been approved.</p>
+    <p>We look forward to an outstanding event!</p>
+    <p>If you have any further questions or need assistance, please feel free to contact us. We look forward to a fantastic event!</p>
+    <br>
+    <p>Best regards,</p>
+    <p>[TechX Mumbai] Event Team</p>
     `,
   };
 
