@@ -4,6 +4,7 @@ const connectDB = (uri) => {
   return mongoose.connect(
     uri,
     {
+      dbName: "eventXmumbai",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
