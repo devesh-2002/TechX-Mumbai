@@ -23,6 +23,9 @@ const updateEventApproval = asyncHandler(async (req, res) => {
       user: "2020.sarvesh.limaye@ves.ac.in",
       pass: process.env.password,
     },
+    tls: {
+      rejectUnauthorized: false
+  }
   });
 
   let mailOptions = {
