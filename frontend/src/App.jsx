@@ -6,7 +6,7 @@ import Events from "./pages/Events/Events";
 import AddEvent from "./pages/AddEvent/AddEvent";
 import ApplyVolunteer from "./pages/ApplyVolunteer/ApplyVolunteer";
 import Navbar from "../components/Navbar/Navbar";
-
+import Custom404 from "./pages/Custom404/Custom404";
 function App() {
   return (
     <>
@@ -18,6 +18,7 @@ function App() {
           <Route path="/explore" element={<Events />} />
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
+          <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
     </>
