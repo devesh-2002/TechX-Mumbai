@@ -51,7 +51,7 @@ export default function Navbar() {
             ml="2"
             color="brand.00"
           >
-            <Link to="/">MedMate</Link>
+            <Link to="/">TechX Mumbai</Link>
           </HStack>
           <Flex alignItems={"center"}>
             {user && (
@@ -62,9 +62,9 @@ export default function Navbar() {
                   display={{ base: "none", md: "flex" }}
                   marginRight={4}
                 >
-                  <Link to="/book">
+                  <Link to="/explore">
                     <Button w="full" variant="ghost">
-                      Book Appointment
+                      Explore
                     </Button>
                   </Link>
                 </HStack>
@@ -74,9 +74,9 @@ export default function Navbar() {
                   display={{ base: "none", md: "flex" }}
                   marginRight={4}
                 >
-                  <Link to="/profile">
+                  <Link to="/add-event">
                     <Button w="full" variant="ghost">
-                      Profile
+                      Add Events
                     </Button>
                   </Link>
                 </HStack>
@@ -127,16 +127,16 @@ export default function Navbar() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Link to="/profile">
+              <Link to="/explore">
                 <Button w="full" variant="ghost">
-                  Profile
+                  Explore
                 </Button>
               </Link>
             </Stack>
             <Stack as={"nav"} spacing={4}>
-              <Link to="/book">
+              <Link to="/add-event">
                 <Button w="full" variant="ghost">
-                  Book Appointment
+                  Add Events
                 </Button>
               </Link>
             </Stack>
