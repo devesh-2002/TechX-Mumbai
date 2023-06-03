@@ -50,7 +50,7 @@ const addUser = asyncHandler(async (req, res) => {
 const getUserfromemail = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email: req.params.email });
   if (user) {
-    res.status(200).json(user._id);
+    res.status(200).json(user);
   } else {
     res.status(404);
     console.log("User not found");
