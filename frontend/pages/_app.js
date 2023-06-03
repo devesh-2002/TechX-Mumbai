@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import "../styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import Navbar from "../components/Navbar/Navbar";
 
 function MyApp({ Component, pageProps }) {
   const colors = {
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserProvider>
       <ChakraProvider theme={theme}>
+        <Navbar />
         <Component {...pageProps} />
       </ChakraProvider>
     </UserProvider>
