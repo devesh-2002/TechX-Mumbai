@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Progress,
   Box,
@@ -26,6 +26,7 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import FileBase64 from "react-file-base64";
+import { LoadScript, StandaloneSearchBox } from "@react-google-maps/api";
 
 const obj = {
   title: "",
@@ -122,11 +123,28 @@ const Form2 = () => {
   const [datetime, setDatetime] = useState("");
   const [location, setLocation] = useState("");
   const [eventBanner, setEventBanner] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const inputRef = useRef();
+
+  const handlePlaceChanged = () => {
+    const [place] = inputRef.current.getPlaces();
+    if (place) {
+      console.log(place.formatted_address);
+      setLocation(place.formatted_address);
+      setLat(place.geometry.location.lat());
+      setLng(place.geometry.location.lng());
+      console.log(place.geometry.location.lat());
+      console.log(place.geometry.location.lng());
+    }
+  };
 
   obj.domain = domain;
   obj.datetime = datetime;
   obj.location = location;
   obj.eventBanner = eventBanner;
+
+  console.log(lat, lng);
 
   return (
     <>
@@ -184,11 +202,17 @@ const Form2 = () => {
         <FormLabel htmlFor="location" fontWeight={"normal"}>
           Location
         </FormLabel>
-        <Input
-          id="location"
-          placeholder="Location..."
-          onChange={(e) => setLocation(e.target.value)}
-        />
+        <LoadScript
+          googleMapsApiKey="AIzaSyB5mC45USvzTjQQbn4gWdlKOHHpKs6Yvn8"
+          libraries={["places"]}
+        >
+          <StandaloneSearchBox
+            onLoad={(ref) => (inputRef.current = ref)}
+            onPlacesChanged={handlePlaceChanged}
+          >
+            <Input type="text" id="location" placeholder="Set Location..." />
+          </StandaloneSearchBox>
+        </LoadScript>
       </FormControl>
       <FormControl mt="2%">
         <FormLabel
