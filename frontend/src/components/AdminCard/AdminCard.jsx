@@ -107,7 +107,7 @@ export default function AdminCard({
               }}
               onClick={handleClick}
             >
-              View More
+              Approve
             </Button>
           </Box>
         </Center>
