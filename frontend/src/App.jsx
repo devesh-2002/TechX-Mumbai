@@ -5,7 +5,7 @@ import Admin from "./pages/Admin/Admin";
 import Events from "./pages/Events/Events";
 import AddEvent from "./pages/AddEvent/AddEvent";
 import ApplyVolunteer from "./pages/ApplyVolunteer/ApplyVolunteer";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (

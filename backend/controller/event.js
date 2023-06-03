@@ -2,7 +2,10 @@ const Event = require("../models/event");
 const asyncHandler = require("express-async-handler");
 
 const getEvents = async (req, res) => {
-  res.status(200).json(await Event.find());
+  res
+    .status(200)
+    .json(await Event.find().populate("organizer"))
+    ;
 };
 
 const getEventById = async (req, res) => {
@@ -14,6 +17,19 @@ const getEventById = async (req, res) => {
     console.log("Event not found");
   }
 };
+
+const updateEventApproval = asyncHandler(async (req, res) => {
+  const event = await Event.findByIdAndUpdate(req.params.id, {
+    isApproved: true,
+    function(err, docs) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Updated User : ", docs);
+      }
+    },
+  });
+});
 
 const createEvent = asyncHandler(async (req, res) => {
   const {
@@ -80,4 +96,4 @@ const createEvent = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getEvents, getEventById, createEvent };
+module.exports = { getEvents, getEventById, createEvent, updateEventApproval };
