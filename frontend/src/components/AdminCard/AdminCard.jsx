@@ -31,12 +31,25 @@ export default function AdminCard({
   organizer,
   domain,
 }) {
-
   const Navigate = useNavigate();
 
-  const handleClick = () => {
-    Navigate(`/events/${id}`);
-  }
+  // const handleClick = () => {
+  //   Navigate(`/events/${id}`);
+  // }
+
+  const approveEvent = async () => {
+    const response = await fetch(`http://localhost:5000/api/events/approval/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        isApproved: true,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
 
   return (
     <div>
@@ -69,7 +82,7 @@ export default function AdminCard({
                 fontSize={"sm"}
                 letterSpacing={1.1}
               >
-                Domain
+                {domain}
               </Text>
               <Heading
                 color={useColorModeValue("gray.700", "white")}
@@ -90,7 +103,7 @@ export default function AdminCard({
               </Stack>
               <Stack>
                 <Text ml={8} color={"green.400"} px={10} fontWeight={"bold"}>
-                  Online
+                  {mode}
                 </Text>
               </Stack>
             </Stack>
@@ -105,7 +118,10 @@ export default function AdminCard({
                 boxShadow: "lg",
                 variant: "solid",
               }}
-              onClick={handleClick}
+              onClick={()=>{
+                approveEvent();
+                Navigate(`/explore/`);
+              }}
             >
               Approve
             </Button>
