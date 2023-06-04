@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Admin from "./pages/Admin/Admin";
+import Profile from "./pages/Profile/Profile";
 import Events from "./pages/Events/Events";
 import AddEvent from "./pages/AddEvent/AddEvent";
 import ApplyVolunteer from "./pages/ApplyVolunteer/ApplyVolunteer";
@@ -22,8 +23,9 @@ function App() {
           <Route path="/explore" element={<Events />} />
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/explore/:id" element={<EventDetails />} />
-          <Route path="/cfp/:id" element={< CFPForm/>}></Route>
+          <Route path="/cfp/:id" element={<CFPForm />}></Route>
           <Route path="/success/:id" element={<SuccessPage />} />
           <Route path="*" element={<Custom404 />} />
         </Routes>
