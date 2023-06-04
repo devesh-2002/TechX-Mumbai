@@ -45,7 +45,7 @@ export default function Simple() {
     const stripe = async () => {
       console.log(price);
       console.log(title);
-      if (event.price && event.title && event.description && event.image) {
+      if (event.price && event.title && event.description) {
         console.log("all good");
         let response = await fetch(
           "http://localhost:5000/api/stripe/create-checkout-session",
@@ -59,6 +59,7 @@ export default function Simple() {
               name: event.title,
               description: event.description,
               image: event.image,
+              id: event._id,
             }),
           }
         );
