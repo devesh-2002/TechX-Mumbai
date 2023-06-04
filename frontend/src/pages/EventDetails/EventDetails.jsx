@@ -27,6 +27,8 @@ export default function Simple() {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [attendees, setAttendees] = useState([]);
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
 
   useEffect(() => {
     const eventId = window.location.pathname.split("/")[2];
@@ -41,6 +43,10 @@ export default function Simple() {
       setPrice(data.price);
       setImage(data.image);
       setAttendees(data.attendees);
+      setLat(data.latitude);
+      setLng(data.longitude);
+
+      console.log(data.latitude, data.longitude);
     };
     getEvent();
 
@@ -82,7 +88,7 @@ export default function Simple() {
         spacing={{ base: 8, md: 10 }}
         py={{ base: 18, md: 24 }}
       >
-        <Flex>
+        <Flex flexDirection="column">
           <Image
             rounded={"md"}
             alt={"product image"}
@@ -93,7 +99,19 @@ export default function Simple() {
             align={"center"}
             w={"100%"}
             h={{ base: "100%", sm: "400px", lg: "500px" }}
+            marginBottom={"30px"}
           />
+
+          <iframe
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyB5mC45USvzTjQQbn4gWdlKOHHpKs6Yvn8&q=${lat},${lng}`}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0, borderRadius: "5px" }}
+            allowFullScreen=""
+            aria-hidden="false"
+            tabIndex="0"
+          ></iframe>
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
           <Box as={"header"}>
