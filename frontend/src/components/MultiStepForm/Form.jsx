@@ -37,6 +37,8 @@ const obj = {
   location: "",
   tickets: 0,
   prize: 0,
+  lat: 0,
+  lng: 0,
 };
 console.log(obj);
 
@@ -123,8 +125,8 @@ const Form2 = () => {
   const [datetime, setDatetime] = useState("");
   const [location, setLocation] = useState("");
   const [eventBanner, setEventBanner] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   const inputRef = useRef();
 
   const handlePlaceChanged = () => {
@@ -143,6 +145,8 @@ const Form2 = () => {
   obj.datetime = datetime;
   obj.location = location;
   obj.eventBanner = eventBanner;
+  obj.lat = lat;
+  obj.lng = lng;
 
   console.log(lat, lng);
 
@@ -369,6 +373,7 @@ export default function multistep() {
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(33.33);
   const [id, setId] = useState("");
+
   const { user } = useAuth0();
   const email = user.email;
   useEffect(() => {}, []);
@@ -456,6 +461,8 @@ export default function multistep() {
                         tickets: obj.tickets,
                         domain: obj.domain,
                         image: obj.eventBanner,
+                        latitude: obj.lat,
+                        longitude: obj.lng,
                       }),
                     }
                   );

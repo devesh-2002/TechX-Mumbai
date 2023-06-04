@@ -33,7 +33,7 @@ const Admin = () => {
   const checkUser = (e) => {
     e.preventDefault();
     if (
-      (user.email === "kayalsoham61@gmail.com" ||
+      (user.email === "sohamkayal012@gmail.com" ||
         user.email === "mukulkolpe45@gmail.com" ||
         user.email === "sarveshlimaye2002@gmail.com") &&
       password === "root"
