@@ -14,7 +14,9 @@ const getEvents = async (req, res) => {
 };
 
 const getEventById = async (req, res) => {
-  const event = await Event.findById(req.params.id).populate("attendees");
+  const event = await Event.findById(req.params.id)
+    .populate("attendees")
+    .populate("organizer");
   if (event) {
     res.status(200).json(event);
   } else {

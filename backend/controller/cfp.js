@@ -15,6 +15,16 @@ const getCFPById = async (req, res) => {
   }
 };
 
+const getCFPByEventId = async (req, res) => {
+  const cfp = await CFP.find({ eventId: req.params.id }).populate("userId");
+  if (cfp) {
+    res.status(200).json(cfp);
+  } else {
+    res.status(404);
+    console.log("CFP not found");
+  }
+};
+
 const createCFP = asyncHandler(async (req, res) => {
   const {
     title,
@@ -62,4 +72,4 @@ const createCFP = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getCFPs, getCFPById, createCFP };
+module.exports = { getCFPs, getCFPById, createCFP, getCFPByEventId };

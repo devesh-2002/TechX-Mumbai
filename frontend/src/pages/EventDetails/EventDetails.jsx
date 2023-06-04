@@ -13,16 +13,20 @@ import {
   StackDivider,
   useColorModeValue,
   VisuallyHidden,
+  Link,
   List,
   ListItem,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 import { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Simple() {
   const [event, setEvent] = useState({});
   const [title, setTitle] = useState("");
+  const [orgemail, setOrgemail] = useState("");
+  const { user } = useAuth0();
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -37,6 +41,7 @@ export default function Simple() {
         `http://localhost:5000/api/events/${eventId}`
       );
       const data = await response.json();
+      setOrgemail(data.organizer.email);
       setEvent(data);
       setTitle(data.title);
       setDescription(data.description);
@@ -80,7 +85,6 @@ export default function Simple() {
   }, [event.price, event.title, event.description, event.image]);
 
   const [url, setUrl] = useState("");
-
   return (
     <Container maxW={"7xl"}>
       <SimpleGrid
@@ -248,6 +252,24 @@ export default function Simple() {
           >
             Apply as volunteer
           </Button>
+          {user.email === orgemail ? (
+            <Button
+              rounded={"none"}
+              w={"md"}
+              size={"lg"}
+              py={"7"}
+              ml={16}
+              bg={useColorModeValue("gray.900", "gray.50")}
+              color={useColorModeValue("white", "gray.900")}
+              textTransform={"uppercase"}
+              _hover={{
+                transform: "translateY(2px)",
+                boxShadow: "lg",
+              }}
+            >
+              <Link href={`/explore/${event._id}/cfp`}>View CFP</Link>
+            </Button>
+          ) : null}
         </Stack>
       </SimpleGrid>
     </Container>
