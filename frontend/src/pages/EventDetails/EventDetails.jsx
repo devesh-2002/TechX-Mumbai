@@ -26,6 +26,7 @@ export default function Simple() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [attendees, setAttendees] = useState([]);
 
   useEffect(() => {
     const eventId = window.location.pathname.split("/")[2];
@@ -39,6 +40,7 @@ export default function Simple() {
       setDescription(data.description);
       setPrice(data.price);
       setImage(data.image);
+      setAttendees(data.attendees);
     };
     getEvent();
 
@@ -164,7 +166,7 @@ export default function Simple() {
                   <Text as={"span"} fontWeight={"bold"}>
                     Tickets Left:
                   </Text>{" "}
-                  {event.tickets}
+                  {event.tickets - attendees.length}
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
