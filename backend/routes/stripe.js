@@ -6,7 +6,7 @@ const stripe = require("stripe")(
 );
 
 router.post("/create-checkout-session", async (req, res) => {
-  const { price, name, description, image } = req.body;
+  const { id,price, name, description, image } = req.body;
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -22,7 +22,7 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:3000/",
+    success_url: `http://localhost:3000/success/${id}`,
     cancel_url: "http://localhost:3000/events",
   });
 
