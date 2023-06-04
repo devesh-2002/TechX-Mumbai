@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
+import {useNavigate} from "react-router-dom";
 
 const SuccessPage = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [dbUser, setDbUser] = useState({});
   const [event, setEvent] = useState({});
+  const navigate = useNavigate();
 
   const eventId = window.location.pathname.split("/")[2];
   const getUser = async () => {
@@ -15,7 +19,7 @@ const SuccessPage = () => {
     console.log(data);
     setDbUser(data);
 
-    if(eventId){
+    if (eventId) {
       var ind = data.attendedEvents.indexOf(eventId);
       if (ind == -1) {
         const res2 = await fetch(
@@ -36,15 +40,13 @@ const SuccessPage = () => {
   };
 
   const getEvent = async () => {
-    const response = await fetch(
-      `http://localhost:5000/api/events/${eventId}`
-    );
+    const response = await fetch(`http://localhost:5000/api/events/${eventId}`);
     const data = await response.json();
     console.log(data);
     setEvent(data);
 
     var ind = data.attendees.indexOf(dbUser._id);
-    if(dbUser._id ) {
+    if (dbUser._id) {
       if (ind == -1) {
         const res2 = await fetch(
           `http://localhost:5000/api/events/attendees/${eventId}`,
@@ -65,16 +67,26 @@ const SuccessPage = () => {
   const handleClick = async () => {
     getUser();
     getEvent();
-  }
+    navigate("/");
+  };
 
-  return <div>
-    {user && (
-      <button onClick={handleClick}>
-        Back to Home Page
-        </button>
-
-    )}
-  </div>;
+  return (
+    <div>
+      {user && (
+        <div>
+          <Box textAlign="center" py={10} px={6}>
+            <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
+            <Heading as="h2" size="xl" mt={6} mb={2}>
+              You are registered successfullt for the event! Thank you!
+            </Heading>
+            <Text color={"gray.500"}>
+              <button onClick={handleClick}>Back to Home Page</button>
+            </Text>
+          </Box>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default SuccessPage;

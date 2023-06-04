@@ -71,11 +71,11 @@ export default function Navbar() {
             spacing={8}
             alignItems={"center"}
             fontSize="26px"
-            fontWeight="0"
+            fontWeight={"bold"}
             ml="2"
             color="brand.00"
           >
-            <Link to="/">TechX Mumbai</Link>
+            <Link to="/">TechXMumbai</Link>
           </HStack>
           <Flex alignItems={"center"}>
             {isAuthenticated && (

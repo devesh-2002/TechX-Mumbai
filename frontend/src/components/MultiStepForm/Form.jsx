@@ -377,13 +377,9 @@ export default function multistep() {
   const { user } = useAuth0();
   const email = user.email;
   useEffect(() => {}, []);
-  const [submitted,setSubmitted] = useState(false);
-
+  const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div>
-    {!submitted ?
-    
     <>
       <Box
         borderWidth="1px"
@@ -488,12 +484,6 @@ export default function multistep() {
           </Flex>
         </ButtonGroup>
       </Box>
-    </> : <div>
-    <p>We are thrilled to inform you that, the event you registered has been approved.</p>
-    <p>We look forward to an outstanding event!</p>
-    </div>
-    }
-
-    </div>
+    </>
   );
 }
