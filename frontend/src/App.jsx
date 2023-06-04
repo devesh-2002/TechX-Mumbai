@@ -9,6 +9,7 @@ import Custom404 from "./pages/Custom404/Custom404";
 import Navbar from "./components/Navbar/Navbar";
 import EventDetails from "./pages/EventDetails/EventDetails";
 import CFPForm from "./components/CFPForm/CFPForm";
+import SuccessPage from "./pages/SuccessPage/SuccessPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/apply-volunteer" element={<ApplyVolunteer />} />
           <Route path="/explore/:id" element={<EventDetails />} />
           <Route path="/cfp/:id" element={< CFPForm/>}></Route>
+          <Route path="/success/:id" element={<SuccessPage />} />
           <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
