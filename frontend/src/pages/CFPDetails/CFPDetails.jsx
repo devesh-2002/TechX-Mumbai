@@ -151,6 +151,7 @@ export default function CFPDetails() {
                     variant="solid"
                     colorScheme={proposal.isApproved ? "green" : "red"}
                     size="sm"
+                    
                   >
                     {proposal.isApproved ? "Approved" : "Not Approved"}
                   </Button>

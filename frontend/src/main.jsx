@@ -25,14 +25,13 @@ const config = {
 };
 
 const theme = extendTheme({ colors, config });
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Auth0Provider
-      domain="dev-uubmit4tpy5bi5v1.us.auth0.com"
-      clientId="OZAJnukEduuJJHE4gJUOPstTitD0zx7q"
+      domain="dev-f7wywomge877afnd.us.auth0.com"
+      clientId="Mz0s5WPHCNJ8Rhe1JOY1xT3xUPtXda6N"
       authorizationParams={{
-        redirect_uri: window.location.origin,
+        redirect_uri: window.location.href,
       }}
     >
       <ChakraProvider theme={theme}>

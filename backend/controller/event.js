@@ -48,7 +48,7 @@ const updateEventApproval = asyncHandler(async (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "2020.sarvesh.limaye@ves.ac.in",
+      user: "2020.devesh.rahatekar@ves.ac.in",
       pass: process.env.password,
     },
     tls: {
@@ -57,10 +57,11 @@ const updateEventApproval = asyncHandler(async (req, res) => {
   });
 
   let mailOptions = {
-    from: "2020.sarvesh.limaye@ves.ac.in",
+    from: "2020.devesh.rahatekar@ves.ac.in",
     to: email,
     subject: "[TechX Mumbai] Event Registration Approved",
-    html: `
+    html: 
+    `
     <p><b>Congratulations🎉🎉!</b></p>
     <p>We are thrilled to inform you that, the event you registered has been approved.</p>
     <p>We look forward to an outstanding event!</p>

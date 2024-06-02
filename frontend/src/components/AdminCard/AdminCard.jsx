@@ -33,9 +33,9 @@ export default function AdminCard({
 }) {
   const Navigate = useNavigate();
 
-  // const handleClick = () => {
-  //   Navigate(`/events/${id}`);
-  // }
+  const handleClick = () => {
+    Navigate(`/events/${id}`);
+  }
   const email = organizer.email;
   console.log(email);
   const approveEvent = async () => {

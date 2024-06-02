@@ -203,22 +203,6 @@ const Form2 = () => {
         />
       </FormControl>
       <FormControl mt="2%">
-        <FormLabel htmlFor="location" fontWeight={"normal"}>
-          Location
-        </FormLabel>
-        <LoadScript
-          googleMapsApiKey="AIzaSyB5mC45USvzTjQQbn4gWdlKOHHpKs6Yvn8"
-          libraries={["places"]}
-        >
-          <StandaloneSearchBox
-            onLoad={(ref) => (inputRef.current = ref)}
-            onPlacesChanged={handlePlaceChanged}
-          >
-            <Input type="text" id="location" placeholder="Set Location..." />
-          </StandaloneSearchBox>
-        </LoadScript>
-      </FormControl>
-      <FormControl mt="2%">
         <FormLabel
           fontSize="sm"
           fontWeight={"normal"}

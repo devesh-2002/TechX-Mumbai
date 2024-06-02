@@ -77,7 +77,7 @@ const SuccessPage = () => {
           <Box textAlign="center" py={10} px={6}>
             <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
             <Heading as="h2" size="xl" mt={6} mb={2}>
-              You are registered successfullt for the event! Thank you!
+              You are registered successfully for the event! Thank you!
             </Heading>
             <Text color={"gray.500"}>
               <button onClick={handleClick}>Back to Home Page</button>

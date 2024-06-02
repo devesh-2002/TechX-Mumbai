@@ -21,6 +21,7 @@ import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from 'react-router-dom';
 
 export default function Simple() {
   const [event, setEvent] = useState({});
@@ -33,7 +34,8 @@ export default function Simple() {
   const [attendees, setAttendees] = useState([]);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const eventId = window.location.pathname.split("/")[2];
     const getEvent = async () => {
@@ -106,16 +108,7 @@ export default function Simple() {
             marginBottom={"30px"}
           />
 
-          <iframe
-            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyB5mC45USvzTjQQbn4gWdlKOHHpKs6Yvn8&q=${lat},${lng}`}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            style={{ border: 0, borderRadius: "5px" }}
-            allowFullScreen=""
-            aria-hidden="false"
-            tabIndex="0"
-          ></iframe>
+   
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
           <Box as={"header"}>
@@ -233,25 +226,11 @@ export default function Simple() {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
-          >
+            onClick={() => { navigate(`/cfp/apply`) }}
+            >
             Apply as speaker
           </Button>
-          <Button
-            rounded={"none"}
-            w={"md"}
-            size={"lg"}
-            py={"7"}
-            ml={16}
-            bg={useColorModeValue("gray.900", "gray.50")}
-            color={useColorModeValue("white", "gray.900")}
-            textTransform={"uppercase"}
-            _hover={{
-              transform: "translateY(2px)",
-              boxShadow: "lg",
-            }}
-          >
-            Apply as volunteer
-          </Button>
+
           {user.email === orgemail ? (
             <Button
               rounded={"none"}
@@ -266,8 +245,9 @@ export default function Simple() {
                 transform: "translateY(2px)",
                 boxShadow: "lg",
               }}
+              onClick={()=>{navigate(`/explore/${event._id}/cfp`)}}
             >
-              <Link href={`/explore/${event._id}/cfp`}>View CFP</Link>
+              View CFP
             </Button>
           ) : null}
         </Stack>

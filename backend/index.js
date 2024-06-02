@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bodyParser = require("body-parser")
 let cors = require("cors");
 const express = require("express");
 const userRoutes = require("./routes/user");
@@ -19,6 +20,7 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.send("Initialized successfully !");
@@ -31,7 +33,9 @@ app.use("/api/stripe", striperoute);
 
 const start = async () => {
   try {
+    console.log(process.env.MONGODB_URI);
     await connectDB(process.env.MONGODB_URI);
+    // console.log(process.env.MONGODB_URI);
     app.listen(port, console.log(`Server started at port ${port}`));
   } catch (err) {
     console.log(err);
