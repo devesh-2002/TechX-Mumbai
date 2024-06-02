@@ -31,7 +31,7 @@ export default function Navbar() {
     let name = user.name;
     let email = user.email;
     let image = user.picture;
-    let result = await fetch("http://localhost:5000/api/users/add", {
+    let result = await fetch("https://techx-mumbai.onrender.com/api/users/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

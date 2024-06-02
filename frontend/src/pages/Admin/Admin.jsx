@@ -22,7 +22,7 @@ const Admin = () => {
 
   useEffect(() => {
     const getEvents = async () => {
-      const response = await fetch("http://localhost:5000/api/events");
+      const response = await fetch("https://techx-mumbai.onrender.com/api/events");
       const data = await response.json();
       setEvents(data);
     };

@@ -13,7 +13,7 @@ const SuccessPage = () => {
   const eventId = window.location.pathname.split("/")[2];
   const getUser = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/users/${user.email}`
+      `https://techx-mumbai.onrender.com/api/users/${user.email}`
     );
     const data = await response.json();
     console.log(data);
@@ -23,7 +23,7 @@ const SuccessPage = () => {
       var ind = data.attendedEvents.indexOf(eventId);
       if (ind == -1) {
         const res2 = await fetch(
-          `http://localhost:5000/api/users/update/${data._id}`,
+          `https://techx-mumbai.onrender.com/api/users/update/${data._id}`,
           {
             method: "PUT",
             headers: {
@@ -40,7 +40,7 @@ const SuccessPage = () => {
   };
 
   const getEvent = async () => {
-    const response = await fetch(`http://localhost:5000/api/events/${eventId}`);
+    const response = await fetch(`https://techx-mumbai.onrender.com/api/events/${eventId}`);
     const data = await response.json();
     console.log(data);
     setEvent(data);
@@ -49,7 +49,7 @@ const SuccessPage = () => {
     if (dbUser._id) {
       if (ind == -1) {
         const res2 = await fetch(
-          `http://localhost:5000/api/events/attendees/${eventId}`,
+          `https://techx-mumbai.onrender.com/api/events/attendees/${eventId}`,
           {
             method: "PUT",
             headers: {

@@ -36,7 +36,7 @@ function CFPForm() {
   }, []);
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:5000/api/users/`);
+    const response = await fetch(`https://techx-mumbai.onrender.com/api/users/`);
     const data = await response.json();
     setUserId(data[0]._id);
     console.log(data[0]._id);
@@ -44,7 +44,7 @@ function CFPForm() {
 
   const handleSubmit = async(e) => {
     const eventId = window.location.pathname.split("/")[2];
-    // const response = await fetch(`http://localhost:5000/api/users/`);
+    // const response = await fetch(`https://techx-mumbai.onrender.com/api/users/`);
     // const data = await response.json();
     // setUserId(data[0]._id);
     // console.log(data[0]._id);
@@ -63,7 +63,7 @@ function CFPForm() {
     }
     console.log(cfp)
 
-    const res = fetch('http://localhost:5000/api/cfps/add', {
+    const res = fetch('https://techx-mumbai.onrender.com/api/cfps/add', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

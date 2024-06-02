@@ -48,7 +48,7 @@ export default function CFPDetails() {
   useEffect(() => {
     const getCFP = async () => {
       const response = await fetch(
-        `http://localhost:5000/api/cfps/event/${id}`
+        `https://techx-mumbai.onrender.com/api/cfps/event/${id}`
       );
       const data = await response.json();
       console.log(data);

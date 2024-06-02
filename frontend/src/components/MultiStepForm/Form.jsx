@@ -423,13 +423,13 @@ export default function multistep() {
                 variant="solid"
                 onClick={async () => {
                   const res = await fetch(
-                    `http://localhost:5000/api/users/${email}`
+                    `https://techx-mumbai.onrender.com/api/users/${email}`
                   );
                   const data = await res.json();
                   setId(data._id);
                   console.log(id);
                   let events = await fetch(
-                    `http://localhost:5000/api/events/add`,
+                    `https://techx-mumbai.onrender.com/api/events/add`,
                     {
                       method: "POST",
                       headers: {

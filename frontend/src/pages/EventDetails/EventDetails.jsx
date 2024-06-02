@@ -40,7 +40,7 @@ export default function Simple() {
     const eventId = window.location.pathname.split("/")[2];
     const getEvent = async () => {
       const response = await fetch(
-        `http://localhost:5000/api/events/${eventId}`
+        `https://techx-mumbai.onrender.com/api/events/${eventId}`
       );
       const data = await response.json();
       setOrgemail(data.organizer.email);
@@ -63,7 +63,7 @@ export default function Simple() {
       if (event.price && event.title && event.description) {
         console.log("all good");
         let response = await fetch(
-          "http://localhost:5000/api/stripe/create-checkout-session",
+          "https://techx-mumbai.onrender.com/api/stripe/create-checkout-session",
           {
             method: "POST",
             headers: {

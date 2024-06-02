@@ -28,7 +28,7 @@ export const Profile = () => {
   useEffect(() => {
     const getUser = async () => {
       const response = await fetch(
-        `http://localhost:5000/api/users/${user.email}`,
+        `https://techx-mumbai.onrender.com/api/users/${user.email}`,
         {
           method: "GET",
           headers: {

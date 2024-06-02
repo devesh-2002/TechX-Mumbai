@@ -40,7 +40,7 @@ export default function AdminCard({
   console.log(email);
   const approveEvent = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/events/approval/${id}`,
+      `https://techx-mumbai.onrender.com/api/events/approval/${id}`,
       {
         method: "PUT",
         headers: {
