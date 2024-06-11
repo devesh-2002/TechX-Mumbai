@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Auth0Provider } from '@auth0/auth0-react';
+import { Provider } from 'react-redux';
+import store from './store'
 
 const colors = {
   brand: {
@@ -27,6 +29,7 @@ const config = {
 const theme = extendTheme({ colors, config });
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Provider store={store}>
     <Auth0Provider
       domain="dev-f7wywomge877afnd.us.auth0.com"
       clientId="Mz0s5WPHCNJ8Rhe1JOY1xT3xUPtXda6N"
@@ -38,5 +41,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <App />
       </ChakraProvider>
     </Auth0Provider>
+    </Provider>
   </React.StrictMode>
 );
